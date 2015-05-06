@@ -4,17 +4,20 @@ define(function () {
 	
   return {
     count : function (start, end) {
-		var timer;
-		for(var i=start;i<=end;i++){
-			(function(count){
-			timer = setTimeout(function(){
-				console.log(count);	
-				},count*100);
-			})(i);
+		var count = start;
+		var timer = setInterval(function(){
+			console.log(count);
+			count++;
+			if(count>end){
+				clearTimer();
+			}
+		},100);
+		function clearTimer(){
+			clearInterval(timer);
 		}
 		return{
 			cancel: function(){
-				clearTimeout(timer);	
+				clearTimer();	
 			}
 		}
 
